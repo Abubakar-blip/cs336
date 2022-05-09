@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<% 
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();		
+
+	Statement stmt = con.createStatement();
+	PreparedStatement ps = null;
+	ResultSet result = null;
+
+
+
+try {
+			//Create a connection string
+			
+			//	String newUser = (String)session.getAttribute( "Username" );
+				String newType = (String)request.getParameter("type");			
+				String newModel = (String)request.getParameter("item_Name");
+			//	String newColor = request.getParameter("color");
+
+			
+				
+				String insert = "INSERT INTO Alerts( type, item_Name)"
+					+ "VALUES (?, ?)";
+				//Create a Prepared SQL statement allowing you to introduce the parameters of the query
+				ps = con.prepareStatement(insert);
+			
+				//Add parameters of the query
+				//ps.setString(1,	newUser);
+				ps.setString(1, newModel);
+
+				ps.setString(2, newType);
+			//	ps.setString(4, newColor);
+			
+
+				//Run the query against the DB
+				ps.executeUpdate();
+				out.print("ALERT SUCCESSFUL");
+				ps = con.prepareStatement("SELECT * FROM Items i JOIN Auction using (item_id) JOIN Phone p using (item_id) WHERE  i.type = ? and i.item_Name = ?");
+				
+				
+				//Add parameters of the query.
+			
+				ps.setString(1, newType);
+				ps.setString(2, newModel);
+				//ps.setString(3,newColor);
+				result = ps.executeQuery();
+				
+				/*
+				while (result.next()) 
+				{
+					String newAuctionID = result.getString("auction_id");
+					String newMessage = "ALERT, Here is the item you wanted";
+					String insert2 = "INSERT INTO Alert_Messages(alert_id, message, auction_id)"
+							+ "VALUES (LAST_INSERT_ID(), ?, ?)";
+					ps = con.prepareStatement(insert2);
+					ps.setString(1, newMessage);
+					ps.setString(2, newAuctionID);
+					ps.executeUpdate();
+				}*/
+				
+			
+	}
+catch (Exception e) 
+{
+	out.print(e);
+}
+
+finally
+{
+
+	if (result != null) result.close();
+	if (ps != null) ps.close();
+	if (stmt != null) stmt.close();
+	if (con != null) con.close();
+}
+
+
+%>
+
+
+</body>
+</html>
