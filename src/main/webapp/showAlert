@@ -25,13 +25,17 @@ try {
 				
 			
 				out.print("<form name='regForm' method='post' action='makeAlert.jsp'>");
+				//out.print("<form name='regForm' method='post' action='viewAlerts.jsp'>");
 				out.print("<table>");
 				out.print("<tr>");    
 				out.print("<td>Type: </td><td><input type='text' name='type' required></td>");
+				session.setAttribute("type", "type");
+
 				out.print("</tr>");
 				out.print("<tr>");   
 				 
 				out.print("<td>Item Name: </td><td><input type='text' name='item_Name' required></td>");
+				session.setAttribute("item_Name", "item_Name");
 				out.print("</tr>");
 				out.print("<tr> ");   
 				 
