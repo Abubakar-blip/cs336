@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="Welcome.jsp"> BuyMe</a> </div>
+<title>Alert</title>
+
 </head>
 <body>
+
 <% 
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();		
@@ -20,7 +23,8 @@
 
 
 try {
-			//Create a connection string
+	
+				//Create a connection string
 			
 			//	String newUser = (String)session.getAttribute( "Username" );
 				String newType = (String)request.getParameter("type");			
