@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Auction Create</title>
+</head>
+<body>
+<h1>Make Alerts</h1>
+<% 
+
+
+	ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();		
+
+
+
+//Create a SQL statement
+	Statement stmt = con.createStatement();
+
+try {
+				
+			
+				out.print("<form name='regForm' method='post' action='makeAlert.jsp'>");
+				out.print("<table>");
+				out.print("<tr>");    
+				out.print("<td>Type: </td><td><input type='text' name='type' required></td>");
+				out.print("</tr>");
+				out.print("<tr>");   
+				 
+				out.print("<td>Item Name: </td><td><input type='text' name='item_Name' required></td>");
+				out.print("</tr>");
+				out.print("<tr> ");   
+				 
+	
+			    out.print("</table>");
+			    out.print("<input type='submit' value='Make Alert'>");
+			    out.print("</form>");
+							
+		}
+		catch (Exception e) 
+		{
+			out.print(e);
+		}
+		finally
+		{
+			if (stmt != null) stmt.close();
+			if (con != null) con.close();
+		}%>
+		
+		
+
+
+</body>
+</html>
