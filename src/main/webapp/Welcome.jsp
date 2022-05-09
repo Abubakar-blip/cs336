@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Hi Beer World</title>
+		<title>CS336</title>
 		 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
@@ -23,9 +23,15 @@
             <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="auctionSell.jsp">Sell Item</a> </div>
              <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="postQuestion.jsp">Ask a Question</a> </div>
              <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="login.jsp">Sign In</a> </div>
+              <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="ShowAlert.jsp"> Set Alerts</a> </div>
+             
+             
+             
+             
         </div>
   </nav>
     <header class="text-center text-white masthead" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
+    <% try{ %>
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -33,16 +39,14 @@
                 <div class="row"> 
       
                 
-                <h1 id="name" style="text-align:center" class=class="col-9 col-md-9 mb-2 mb-md-0"> <% try{ 
+                <h1 id="name" style="text-align:center" class=class="col-9 col-md-9 mb-2 mb-md-0"> <% 
                 	String name = session.getAttribute("name").toString();
                 	
                 	if(name.length() > 0){
                 		
                 	out.println("Welcome " + name);
                 	}
-                }catch (Exception ex) {
-            		
-            	}  %> </h1>
+                 %> </h1>
                 <form method="post" action="logout.jsp"> 
                 	<div class="col-12 ">
                 	
@@ -57,15 +61,32 @@
                    
                         <div class="row">
                            
-                            <div class="col-6"><a class="btn btn-primary btn-lg" type="submit" href="showAuctions.jsp">Show Auctions!</a></div>
-                            <div class="col-6"><a class="btn btn-primary btn-lg" type="submit" href="showQuestions.jsp">Show Questions!</a></div>
+                            <div class="col-4"><a class="btn btn-primary btn-lg" type="submit" href="showAuctions.jsp">Show Auctions!</a></div>
+                            <div class="col-4"><a class="btn btn-primary btn-lg" type="submit" href="showQuestions.jsp">Show Questions!</a></div>
+                <%  String rep = session.getAttribute("rep").toString();
+                	if(rep.length() > 0){
+                %>
+                <div class="col-4"><a class="btn btn-primary btn-lg" type="submit" href="updateAccount.jsp">Update / Delete Accounts</a></div>
+                
+                <%} %>
+                <% String adminLogged = session.getAttribute("admin").toString();
+                
+             	if(adminLogged.length() > 0){
+             %>
+             	
+             	 <div class="col-4"><a class="btn btn-primary btn-lg" type="submit" href="salesReport.jsp">SalesReport </a></div>
+             <%} %>
                         </div>
                          
                    
                 </div>
+                 
                 
             </div>
         </div>
+        <% }catch (Exception ex) {
+    		
+    	}  %>
     </header>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	
