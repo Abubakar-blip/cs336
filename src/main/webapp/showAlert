@@ -29,13 +29,15 @@ try {
 				out.print("<table>");
 				out.print("<tr>");    
 				out.print("<td>Type: </td><td><input type='text' name='type' required></td>");
-				session.setAttribute("type", "type");
-
+				String t = request.getParameter("type");
+				session.setAttribute("type", t);
+				
 				out.print("</tr>");
 				out.print("<tr>");   
 				 
 				out.print("<td>Item Name: </td><td><input type='text' name='item_Name' required></td>");
-				session.setAttribute("item_Name", "item_Name");
+				String s = request.getParameter("item_Name");
+				session.setAttribute("item_Name", s);
 				out.print("</tr>");
 				out.print("<tr> ");   
 				 
